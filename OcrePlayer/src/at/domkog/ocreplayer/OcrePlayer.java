@@ -1,8 +1,8 @@
 package at.domkog.ocreplayer;
 
-import at.domkog.coreplayer.ui.UIManager;
-import at.domkog.coreplayer.ui.content.ContentManager;
-import at.domkog.coreplayer.ui.main.MainUI;
+import at.domkog.ocreplayer.ui.UIManager;
+import at.domkog.ocreplayer.ui.content.ContentManager;
+import at.domkog.ocreplayer.ui.main.MainUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;

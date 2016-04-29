@@ -1,0 +1,43 @@
+.background {
+	-fx-background-color: #D0D0D2;	
+}
+
+.header {
+	-fx-background-color: linear-gradient(to TOP RIGHT, #4E5A6C, #2D3335);
+}
+
+.sidebar {
+	-fx-background-color: #2D3335;
+}
+
+.contentPane {
+	-fx-background-color: WHITE;
+}
+
+.slider_Slider .track {
+    -fx-background-color:null;  /* Hide the track */
+    -fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.208333em; /* 2.5 */
+}
+
+.slider_Slider .thumb {
+	-fx-background-color: #8FA8D1;
+	-fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 1.0em; /* makes sure this remains circular */
+    -fx-padding: 0.6em;
+}
+
+.slider_Progress .bar {
+	-fx-background-color: #8FA8D1;
+	-fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.1em;
+}
+
+.slider_Progress .track {
+	-fx-background-color: #686867;
+    -fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.1em;
+}

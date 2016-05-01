@@ -26,7 +26,7 @@ public class ProgressSlider extends StackPane {
 		slider.prefHeightProperty().bind(this.heightProperty());
 		
 		this.heightProperty().addListener((observeable, oldValue, newValue) -> {
-			progressBar.prefHeightProperty().set(newValue.doubleValue() / 5);
+			progressBar.prefHeightProperty().set(newValue.doubleValue() / 6);
 		});
 		
 		slider.valueProperty().addListener((observeable, oldValue, newValue) -> {

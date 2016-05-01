@@ -25,7 +25,7 @@
 	-fx-background-color: #8FA8D1;
 	-fx-background-insets: 0, 1, 2;
     -fx-background-radius: 1.0em; /* makes sure this remains circular */
-    -fx-padding: 0.6em;
+    -fx-padding: 0.5em;
 }
 
 .slider_Progress .bar {
@@ -40,4 +40,103 @@
     -fx-background-insets: 1 0 -1 0, 0, 1;
     -fx-background-radius: 2.5, 2.5, 1.5;
     -fx-padding: 0.1em;
+}
+
+.menu_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/menu.png');
+}
+
+.menu_Button:hover {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/menuHover.png');
+}
+
+.option_Button {
+	-fx-background-color: #2D3335;
+	-fx-background-radius: 5em;
+}
+
+.option_Button:hover {
+	-fx-background-color: #8FA8D1;
+}
+
+.previous_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/previous.png');
+}
+
+.previous_Button:hover {
+	-fx-background-image: url('icons/previousHover.png');
+}
+
+.play_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/play.png');
+}
+
+.play_Button:hover {
+	-fx-background-image: url('icons/playHover.png');
+}
+
+.pause_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/pause.png');
+}
+
+.pause_Button:hover {
+	-fx-background-image: url('icons/pauseHover.png');
+}
+
+.next_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/next.png');
+}
+
+.next_Button:hover {
+	-fx-background-image: url('icons/nextHover.png');
+}
+
+.speaker_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/speaker.png');
+	-fx-background-size: 12, 12;
+}
+
+.speaker_Button:hover {
+	-fx-background-image: url('icons/speakerhover.png');
+	-fx-background-size: 12, 12;
+}
+
+.mute_Button {
+	-fx-background-color: TRANSPARENT;
+	-fx-border-color: TRANSPARENT;
+	-fx-background-image: url('icons/mute.png');
+	-fx-background-size: 12, 12;
+}
+
+.mute_Button:hover {
+	-fx-background-image: url('icons/mutehover.png');
+	-fx-background-size: 12, 12;
+}
+
+.separator:vertical .line {
+	-fx-border-color: #D0D0D2;
+    -fx-border-width: 0.2px;
+}
+
+.separator:horizontal .line {
+	-fx-border-color: #D0D0D2;
+    -fx-border-width: 0.2px;
+}
+
+.test {
+	-fx-background-color: RED;
 }

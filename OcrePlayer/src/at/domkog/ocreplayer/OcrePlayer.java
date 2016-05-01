@@ -10,7 +10,7 @@ import lombok.Getter;
 public class OcrePlayer extends Application {
 
 	private static final String TITLE = "OcrePlayer";
-	private static final String VERSION = "InDev-1.0.0";
+	private static final String VERSION = "InDev-1.1.0";
 	private static final int COPYRIGHT_YEAR = 2016;
 	
 	public static OcrePlayer instance;

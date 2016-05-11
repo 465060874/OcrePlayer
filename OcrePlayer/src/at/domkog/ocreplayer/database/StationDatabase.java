@@ -8,7 +8,7 @@ public interface StationDatabase {
 
 	public ArrayList<StationEntry> loadLibrary();
 	
-	public StationEntry getFromID(int ID);
+	public StationEntry getFromID(String ID);
 	
 	public void add(StationEntry entry);
 	public void remove(StationEntry entry);

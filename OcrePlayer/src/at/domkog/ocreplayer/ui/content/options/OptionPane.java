@@ -4,14 +4,29 @@ import at.domkog.ocreplayer.ui.content.IContent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class OptionPane extends VBox implements IContent {
 
+	public Text headerTxt;
+	
 	public OptionPane() {
 		super();
+		
+		HBox header = new HBox();
+		header.setAlignment(Pos.CENTER);
+
+		headerTxt = new Text("Menu");
+		headerTxt.getStyleClass().add("option_Text");
+		HBox.setMargin(headerTxt, new Insets(10, 0, 0 ,0));
+		
+		header.getChildren().add(headerTxt);
+		
+		this.getChildren().add(header);
 		
 		FlowPane pane = new FlowPane ();
 		
@@ -23,16 +38,16 @@ public class OptionPane extends VBox implements IContent {
 		
 		pane.prefWidthProperty().bind(this.widthProperty());
 		
-		OptionButton mp3Btn = new OptionButton("mp3.png", "Import Mp3", "importMp3");
+		OptionButton mp3Btn = new OptionButton(this, "mp3.png", "Import Mp3", "importMp3");
 		pane.getChildren().add(mp3Btn);
 		
-		OptionButton stationBtn = new OptionButton("station.png", "Import station", "importStation");
+		OptionButton stationBtn = new OptionButton(this, "station.png", "Import station", "importStation");
 		pane.getChildren().add(stationBtn);
 		
-		OptionButton webBtn = new OptionButton("web.png", "Web interface", "webInterface");
+		OptionButton webBtn = new OptionButton(this, "web.png", "Web interface", "webInterface");
 		pane.getChildren().add(webBtn);
 		
-		OptionButton settingsBtn = new OptionButton("settings.png", "Settings", "settings");
+		OptionButton settingsBtn = new OptionButton(this, "settings.png", "Settings", "settings");
 		pane.getChildren().add(settingsBtn);
 		
 		

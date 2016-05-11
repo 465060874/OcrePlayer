@@ -1,7 +1,9 @@
 package at.domkog.ocreplayer.ui.content.options;
 
 import at.domkog.ocreplayer.OcrePlayer;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +16,11 @@ public class OptionButton extends Button {
 
 	private String contentID;
 	
-	public OptionButton(String img, String label, String contentID) {
+	public OptionButton(OptionPane pane, String img, String label, String contentID) {
 		super();
+		
+		this.setAlignment(Pos.CENTER);
+		this.setContentDisplay(ContentDisplay.CENTER);
 		
 		this.contentID = contentID;
 		
@@ -41,6 +46,14 @@ public class OptionButton extends Button {
         
         this.setOnAction((e) -> {
         	OcrePlayer.contentManager.changeContent(this.contentID);
+        });
+        
+        this.setOnMouseEntered((e) -> {
+        	pane.headerTxt.setText(label);
+        });
+        
+        this.setOnMouseExited((e) -> {
+        	pane.headerTxt.setText("Menu");
         });
         
         this.setPickOnBounds(false);

@@ -120,13 +120,13 @@ public class MainUI extends UI {
 		
 		//Header > Time
 		currentTime = new Text("0:00");
-		currentTime.setStyle("-fx-font-family: 'Ubuntu'; -fx-font-size: 12; -fx-fill: #D0D0D2;");
+		currentTime.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 12; -fx-fill: #D0D0D2;");
 		header.getChildren().add(currentTime);
 		AnchorPane.setTopAnchor(currentTime, 32.0);
 		AnchorPane.setLeftAnchor(currentTime, 325.0);
 		
 		endTime = new Text("0:00");
-		endTime.setStyle("-fx-font-family: 'Ubuntu'; -fx-font-size: 12; -fx-fill: #D0D0D2;");
+		endTime.setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 12; -fx-fill: #D0D0D2;");
 		header.getChildren().add(endTime);
 		AnchorPane.setTopAnchor(endTime, 32.0);
 		AnchorPane.setRightAnchor(endTime, 100.0);
@@ -170,7 +170,7 @@ public class MainUI extends UI {
 		root.setMinSize(1200, 675);
 		scene = new Scene(root);
 		scene.getStylesheets().add("resources/main.css");
-		scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Ubuntu");
+		//scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Ubuntu");
 		
 		root.getStyleClass().add("background");
 	}

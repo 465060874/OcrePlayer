@@ -9,12 +9,14 @@ public interface LibraryDatabase {
 
 	public ArrayList<LibraryEntry> loadLibrary();
 	
-	public LibraryEntry getFromID(int ID);
-	
 	public ArrayList<LibraryEntry> search(Attribute attribute, String key);
 	
 	public void add(LibraryEntry entry);
 	public void remove(LibraryEntry entry);
 	public void update(LibraryEntry entry);
+	
+	public boolean contains(String path);
+	
+	public void shutdown();
 	
 }

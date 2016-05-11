@@ -1,8 +1,8 @@
 package at.domkog.ocreplayer.media.minim;
 
 import at.domkog.ocreplayer.libary.stations.StationEntry;
-import at.domkog.ocreplayer.media.RadioAPI;
 import at.domkog.ocreplayer.media.PlayerAPI.PlayerState;
+import at.domkog.ocreplayer.media.RadioAPI;
 
 public class MinimRadio implements RadioAPI {
 

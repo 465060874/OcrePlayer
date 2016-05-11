@@ -13,7 +13,7 @@ public class SQLiteStationLibrary implements StationDatabase {
 	}
 
 	@Override
-	public StationEntry getFromID(int ID) {
+	public StationEntry getFromID(String ID) {
 		return null;
 	}
 

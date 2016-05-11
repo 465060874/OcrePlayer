@@ -63,6 +63,13 @@
 	-fx-background-color: #8FA8D1;
 }
 
+.option_Text {
+	-fx-font-family: 'Segoe UI';
+	-fx-font-weight: BOLD;
+	-fx-font-size: 32;
+	-fx-fill: #2D3335;
+}
+
 .previous_Button {
 	-fx-background-color: TRANSPARENT;
 	-fx-border-color: TRANSPARENT;
@@ -135,6 +142,15 @@
 .separator:horizontal .line {
 	-fx-border-color: #D0D0D2;
     -fx-border-width: 0.2px;
+}
+
+.contentPane {
+	-fx-focus-color: TRANSPARENT;
+}
+
+.player_Table {
+	-fx-border-color: TRANSPARENT;
+	-fx-focus-color: TRANSPARENT;
 }
 
 .test {

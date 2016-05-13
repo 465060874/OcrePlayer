@@ -32,7 +32,7 @@ public enum PathMode {
 		}
 	}
 	
-	public File buildRelativePath(String path) {
+	private File buildRelativePath(String path) {
 		String adr = jarPath.split(":")[0];
 		return new File(adr + ":" + path);
 	}

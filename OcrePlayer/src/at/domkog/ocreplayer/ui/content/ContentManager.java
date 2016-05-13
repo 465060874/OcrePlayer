@@ -2,6 +2,7 @@ package at.domkog.ocreplayer.ui.content;
 
 import java.util.HashMap;
 
+import javafx.application.Platform;
 import lombok.Getter;
 
 public class ContentManager {
@@ -19,9 +20,11 @@ public class ContentManager {
 	}
 	
 	public void changeContent(IContent content) {
-		removeContent();
-		contentPane.getChildren().add(content.getPane());
-		this.currentPane = content;
+		Platform.runLater(() -> {
+			removeContent();
+			contentPane.getChildren().add(content.getPane());
+			this.currentPane = content;
+		});
 	}
 	
 	public void changeContent(String ID) {

@@ -7,6 +7,7 @@ import at.domkog.ocreplayer.database.StationDatabase;
 import at.domkog.ocreplayer.database.sqlite.PathMode;
 import at.domkog.ocreplayer.database.sqlite.SQLiteLibrary;
 import at.domkog.ocreplayer.database.sqlite.SQLiteStationLibrary;
+import at.domkog.ocreplayer.libary.Library;
 import at.domkog.ocreplayer.libary.tag.ID3TagHandler;
 import at.domkog.ocreplayer.libary.tag.TagHandler;
 import at.domkog.ocreplayer.media.PlayerAPI;
@@ -42,6 +43,8 @@ public class OcrePlayer extends Application {
 	
 	public static LibraryDatabase libraryDatabase;
 	public static TagHandler tagHandler;
+	
+	public static Library library;
 	
 	public static StationDatabase stationDatabase;
 	
@@ -83,6 +86,8 @@ public class OcrePlayer extends Application {
 		playerAPI = new MinimPlayer();
 		radioAPI = new MinimRadio();
 		
+		library = new Library(libraryDatabase);
+		
 		//Initialize UIManager and show default scene
 		uiManager = new UIManager();
 		this.registerUIs();
@@ -90,8 +95,11 @@ public class OcrePlayer extends Application {
 		
 		primaryStage.show();
 		
+		mainUI.playerPane.reloadLibrary();
+		
 		primaryStage.setOnCloseRequest((event) -> {
 			libraryDatabase.shutdown();
+			if(contentManager.getCurrentPane() != null) contentManager.getCurrentPane().dispose();
 		});		
 	}
 	

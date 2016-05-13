@@ -8,6 +8,8 @@ public interface TagHandler {
 	public String getTag(LibraryEntry entry, Attribute attribute);
 	public void setTag(LibraryEntry entry, Attribute attribute);
 	
+	public boolean isValid(LibraryEntry entry);
+	
 	public TagHandler newInstance();
 	
 }

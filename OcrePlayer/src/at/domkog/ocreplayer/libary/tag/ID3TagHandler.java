@@ -2,6 +2,7 @@ package at.domkog.ocreplayer.libary.tag;
 
 import java.io.IOException;
 
+import com.google.common.io.Files;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -47,7 +48,9 @@ public class ID3TagHandler implements TagHandler {
 	        case GENRE:
 	            return hasID3v2Tag ? mp3File.getId3v2Tag().getGenreDescription() : hasID3v1Tag ? mp3File.getId3v1Tag().getGenreDescription() : "";
 	        case TITLE:
-	            return hasID3v2Tag ? mp3File.getId3v2Tag().getTitle() : hasID3v1Tag ? mp3File.getId3v1Tag().getTitle() : "";
+	        	String title = hasID3v2Tag ? mp3File.getId3v2Tag().getTitle() : hasID3v1Tag ? mp3File.getId3v1Tag().getTitle() : "";
+	        	title = (title == null || title.equals("")) ? Files.getNameWithoutExtension(entry.getPath()) : title;
+	            return title;
 	        case TRACK:
 	            return hasID3v2Tag ? mp3File.getId3v2Tag().getTrack() : hasID3v1Tag ? mp3File.getId3v1Tag().getTrack() : "";
 	        case YEAR:
@@ -61,6 +64,10 @@ public class ID3TagHandler implements TagHandler {
 
 	@Override
 	public void setTag(LibraryEntry entry, Attribute attribute) {
+	}
+	
+	public boolean isValid(LibraryEntry entry) {
+		return getMp3File(entry) != null;
 	}
 	
 	public Mp3File getMp3File(LibraryEntry entry) {

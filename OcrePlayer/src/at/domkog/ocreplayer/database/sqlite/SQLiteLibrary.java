@@ -48,9 +48,11 @@ public class SQLiteLibrary implements LibraryDatabase {
 		}
 		
 		executeStatement("CREATE TABLE IF NOT EXISTS library ("
-				+ "ID INT NOT NULL PRIMARY KEY,"
-				+ "Path TEXT"
+				+ "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ "Path TEXT NOT NULL UNIQUE"
 				+ attributes.toString() + ");");
+		
+		executeStatement("CREATE TABLE IF NOT EXISTS folders (path TEXT PRIMARY KEY);");
 	}
 	
 	@Override
@@ -62,11 +64,11 @@ public class SQLiteLibrary implements LibraryDatabase {
 			ResultSet rs = pre.executeQuery();
 			
 			while(rs.next()) {
-				LibraryEntry entry = new LibraryEntry(String.valueOf(rs.getInt("ID")), rs.getString("Path"));
+				LibraryEntry entry = new LibraryEntry();
 				for(Attribute a: Attribute.values()) {
-					if(a == Attribute.ID || a == Attribute.PATH) continue;
 					entry.setAttribute(a, rs.getString(a.toString()));
 				}
+				result.add(entry);
 			}
 			
 			rs.close();
@@ -87,9 +89,8 @@ public class SQLiteLibrary implements LibraryDatabase {
 			ResultSet rs = pre.executeQuery();
 			
 			while(rs.next()) {
-				LibraryEntry entry = new LibraryEntry(String.valueOf(rs.getInt("ID")), rs.getString("Path"));
+				LibraryEntry entry = new LibraryEntry();
 				for(Attribute a: Attribute.values()) {
-					if(a == Attribute.ID || a == Attribute.PATH) continue;
 					entry.setAttribute(a, rs.getString(a.toString()));
 				}
 			}
@@ -103,42 +104,75 @@ public class SQLiteLibrary implements LibraryDatabase {
 	}
 
 	@Override
+	public int getID(String path) {
+		int result = -1;
+		PreparedStatement pre = prepareStatement("SELECT * FROM library WHERE Path = ?;");
+
+		try {
+			pre.setString(1, path);
+			
+			ResultSet rs = pre.executeQuery();
+
+			while(rs.next()) {
+				result = rs.getInt("ID");
+			}
+
+			rs.close();
+			pre.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
 	public void add(LibraryEntry entry) {
 		StringBuilder attr = new StringBuilder();
 		StringBuilder values = new StringBuilder();
 		Attribute[] attributes = Attribute.values();
-		int idIndex = 0;
-		int pathIndex = 0;
+		boolean first = true;
 		for(int i = 0; i < attributes.length; i++) {
-			if(attributes[i] == Attribute.ID) idIndex = i;
-			if(attributes[i] == Attribute.PATH) pathIndex = i;
-			if(i == 0) {
+			if(attributes[i] == Attribute.ID) continue;
+			if(first) {
 				attr.append(attributes[i].toString());
 				values.append("?");
+				first = false;
 			} else {
 				attr.append(", " + attributes[i].toString());
 				values.append(", ?");
 			}
 		}
-		PreparedStatement pre = prepareStatement("INSERT INTO library(" + attr.toString() + ") VALUES(" + values.toString() + ");");
 		
+		PreparedStatement pre = prepareStatement("INSERT INTO library(" + attr.toString() + ") VALUES(" + values.toString() + ");");
 
 		try {
-			for(int i = 1; i <= attributes.length; i++) {
-				if(i == (idIndex + 1)) pre.setInt(i, Integer.valueOf(entry.getID()));
-				else if(i == (pathIndex + 1)) pre.setString(i, OcrePlayer.pathMode.createPath(new File(entry.getPath())));
-				else pre.setString(i, entry.getAttribute(attributes[i - 1]));
+			for(int i = 0; i < attributes.length; i++) {
+				Attribute a = attributes[i];
+				if(a == Attribute.ID) continue;
+				else if(a == Attribute.PATH) pre.setString((i), OcrePlayer.pathMode.createPath(new File(entry.getPath())));
+				else pre.setString((i), entry.getAttribute(a));
 			}
 			
 			execute(pre);
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 		}
+		
+		entry.setAttribute(Attribute.ID, String.valueOf(this.getID(entry.getPath())));
 	}
 
 	@Override
 	public void remove(LibraryEntry entry) {
+		PreparedStatement pre = this.prepareStatement("DELETE FROM library WHERE ID = ?;");
 		
+		try {
+			pre.setInt(1, entry.getID());
+			pre.execute();
+			
+			pre.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -195,6 +229,56 @@ public class SQLiteLibrary implements LibraryDatabase {
 	@Override
 	public void shutdown() {
 		executor.shutdown();
+	}
+
+	@Override
+	public ArrayList<String> loadFolders() {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		PreparedStatement pre = prepareStatement("SELECT * FROM folders;");
+		
+		try {
+			ResultSet rs = pre.executeQuery();
+			
+			while(rs.next()) {
+				result.add(rs.getString("path"));
+			}
+			
+			rs.close();
+			pre.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void addFolder(String path) {
+		PreparedStatement pre = prepareStatement("INSERT INTO folders(path) VALUES(?);");
+		
+		try {
+			pre.setString(1, path);
+			pre.execute();
+			
+			pre.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void removeFolder(String path) {
+		PreparedStatement pre = prepareStatement("DELETE FROM folders WHERE path = ?;");
+		
+		try {
+			pre.setString(1, path);
+			pre.execute();
+			
+			pre.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

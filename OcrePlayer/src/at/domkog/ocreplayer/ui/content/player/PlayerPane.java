@@ -1,8 +1,10 @@
 package at.domkog.ocreplayer.ui.content.player;
 
+import at.domkog.ocreplayer.OcrePlayer;
 import at.domkog.ocreplayer.libary.LibraryEntry;
 import at.domkog.ocreplayer.libary.LibraryEntry.Attribute;
 import at.domkog.ocreplayer.ui.content.IContent;
+import javafx.collections.FXCollections;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -11,6 +13,8 @@ import javafx.scene.layout.VBox;
 
 public class PlayerPane extends VBox implements IContent {
 
+	public TableView<LibraryEntry> table;
+	
 	@SuppressWarnings("unchecked")
 	public PlayerPane() {
 		super();
@@ -22,7 +26,7 @@ public class PlayerPane extends VBox implements IContent {
 		hBox.getStyleClass().add("contentPane");
 		HBox.setHgrow(hBox, Priority.ALWAYS);
 		
-		TableView<LibraryEntry> table = new TableView<LibraryEntry>();
+		table = new TableView<LibraryEntry>();
 
 		table.prefWidthProperty().bind(this.widthProperty());
 		table.prefHeightProperty().bind(this.heightProperty());
@@ -43,6 +47,11 @@ public class PlayerPane extends VBox implements IContent {
 		this.getChildren().add(hBox);
 	}
 	
+	public void reloadLibrary() {
+		table.getItems().clear();
+		table.setItems(FXCollections.observableArrayList(OcrePlayer.library.entries));
+	}
+	
 	@Override
 	public String getID() {
 		return "Player";
@@ -51,6 +60,12 @@ public class PlayerPane extends VBox implements IContent {
 	@Override
 	public Pane getPane() {
 		return this;
+	}
+	
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

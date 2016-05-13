@@ -38,16 +38,16 @@ public class OptionPane extends VBox implements IContent {
 		
 		pane.prefWidthProperty().bind(this.widthProperty());
 		
-		OptionButton mp3Btn = new OptionButton(this, "mp3.png", "Import Mp3", "importMp3");
+		OptionButton mp3Btn = new OptionButton(this, "mp3.png", "Import Mp3", "Importer", true);
 		pane.getChildren().add(mp3Btn);
 		
-		OptionButton stationBtn = new OptionButton(this, "station.png", "Import station", "importStation");
+		OptionButton stationBtn = new OptionButton(this, "station.png", "Import station", "importStation", false);
 		pane.getChildren().add(stationBtn);
 		
-		OptionButton webBtn = new OptionButton(this, "web.png", "Web interface", "webInterface");
+		OptionButton webBtn = new OptionButton(this, "web.png", "Web interface", "webInterface", false);
 		pane.getChildren().add(webBtn);
 		
-		OptionButton settingsBtn = new OptionButton(this, "settings.png", "Settings", "settings");
+		OptionButton settingsBtn = new OptionButton(this, "settings.png", "Settings", "settings", false);
 		pane.getChildren().add(settingsBtn);
 		
 		
@@ -67,6 +67,12 @@ public class OptionPane extends VBox implements IContent {
 	@Override
 	public Pane getPane() {
 		return this;
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -16,7 +16,7 @@ public class OptionButton extends Button {
 
 	private String contentID;
 	
-	public OptionButton(OptionPane pane, String img, String label, String contentID) {
+	public OptionButton(OptionPane pane, String img, String label, String contentID, boolean newInstance) {
 		super();
 		
 		this.setAlignment(Pos.CENTER);
@@ -45,7 +45,13 @@ public class OptionButton extends Button {
         this.setEffect(ds);
         
         this.setOnAction((e) -> {
-        	OcrePlayer.contentManager.changeContent(this.contentID);
+        	if(newInstance)
+				try {
+					OcrePlayer.contentManager.changeContent(OcrePlayer.contentManager.get(contentID).getClass().newInstance());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			else OcrePlayer.contentManager.changeContent(this.contentID);
         });
         
         this.setOnMouseEntered((e) -> {

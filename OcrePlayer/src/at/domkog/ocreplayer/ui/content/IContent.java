@@ -7,4 +7,6 @@ public interface IContent {
 	public String getID();
 	public Pane getPane();
 	
+	public void dispose();
+	
 }

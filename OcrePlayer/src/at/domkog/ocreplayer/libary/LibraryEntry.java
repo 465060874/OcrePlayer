@@ -17,16 +17,20 @@ public class LibraryEntry {
 
 	private HashMap<Attribute, String> attributes;
 	
-	public LibraryEntry(String ID, String path) {
+	public LibraryEntry() {
+		attributes = new HashMap<Attribute, String>();
+		this.addDefaults();
+	}
+	
+	public LibraryEntry(String path) {
 		attributes = new HashMap<Attribute, String>();
 		this.addDefaults();
 		
-		attributes.put(Attribute.ID, ID);
 		attributes.put(Attribute.PATH, path);
 	}
 	
-	public String getID() {
-		return getAttribute(Attribute.ID);
+	public int getID() {
+		return Integer.parseInt(getAttribute(Attribute.ID));
 	}
 	
 	public String getPath() {
@@ -41,12 +45,14 @@ public class LibraryEntry {
 		attributes.put(a, value);
 	}
 	
-	public void syncTags() {
+	public boolean syncTags() {
 		TagHandler tagHandler = OcrePlayer.tagHandler.newInstance();
+		if(!tagHandler.isValid(this)) return false;
 		for(Attribute a: Attribute.values()) {
 			if(a == Attribute.PATH || a == Attribute.ID) continue;
 			else attributes.put(a, tagHandler.getTag(this, a));
 		}
+		return true;
 	}
 	
 	private void addDefaults() {

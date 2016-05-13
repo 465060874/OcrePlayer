@@ -5,6 +5,7 @@ import at.domkog.ocreplayer.media.InputController;
 import at.domkog.ocreplayer.ui.UI;
 import at.domkog.ocreplayer.ui.content.ContentManager;
 import at.domkog.ocreplayer.ui.content.ContentPane;
+import at.domkog.ocreplayer.ui.content.importer.ImportPane;
 import at.domkog.ocreplayer.ui.content.options.OptionPane;
 import at.domkog.ocreplayer.ui.content.player.PlayerPane;
 import javafx.geometry.Orientation;
@@ -21,6 +22,8 @@ public class MainUI extends UI {
 	
 	public ProgressSlider timeline, volume;
 	public Text currentTime, endTime;
+	
+	public PlayerPane playerPane;
 	
 	@Override
 	public String getID() {
@@ -152,8 +155,9 @@ public class MainUI extends UI {
 	}
 
 	private void registerContentPanes() {
-		OcrePlayer.contentManager.register(new PlayerPane());
+		OcrePlayer.contentManager.register(playerPane = new PlayerPane());
 		OcrePlayer.contentManager.register(new OptionPane());
+		OcrePlayer.contentManager.register(new ImportPane());
 	}
 	
 	@Override
